@@ -165,7 +165,7 @@ def run():
     data_dir = './data'
     runs_dir = './runs'
     tests.test_for_kitti_dataset(data_dir)
-    epochs = 30
+    epochs = 1
     batch_size = multiprocessing.cpu_count()
 
     # Download pretrained vgg model
