@@ -111,9 +111,6 @@ def gen_test_output(sess, logits, keep_prob, image_pl, data_folder, image_shape)
     :param image_shape: Tuple - Shape of image
     :return: Output for for each test image
     """
-    search_path = os.path.join(data_folder, 'image_2', '*.png')
-    print("Search path: %s" % search_path)
-    print("Found images: %s" % len(glob(search_path)))
     for image_file in glob(os.path.join(data_folder, 'image_2', '*.png')):
         image = scipy.misc.imresize(scipy.misc.imread(image_file), image_shape)
 
