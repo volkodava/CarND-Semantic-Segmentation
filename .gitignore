@@ -104,3 +104,5 @@ RUNS/
 
 .idea/
 data/data_road/
+*.gz
+*.zip
