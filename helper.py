@@ -149,7 +149,9 @@ def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_pr
 
     gen_images = gen_test_output(sess, logits, keep_prob, input_image, data_dir, image_shape)
     for name, image in gen_images:
-        scipy.misc.imsave(os.path.join(output_data_dir, name), image)
+        file_name = os.path.join(output_data_dir, name)
+        scipy.misc.imsave(file_name, image)
+        print("Saved to %s" % file_name)
 
     vid_clip = ImageSequenceClip(output_data_dir, fps=25)
     result_video = os.path.join(output_data_dir, "result.mp4")
