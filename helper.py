@@ -148,6 +148,9 @@ def save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_p
 
 
 def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_prob, logits):
+    print("Data dir: %s" % data_dir)
+    print("Output dir: %s" % output_data_dir)
+    
     if os.path.exists(output_data_dir):
         shutil.rmtree(output_data_dir)
     os.makedirs(output_data_dir, exist_ok=True)
