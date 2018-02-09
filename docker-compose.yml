@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  lab:
+    build: .
+    container_name: lab
+    ports:
+      - 8888:8888
+    volumes:
+      - ../CarND-Semantic-Segmentation:/app
+    working_dir: /app
+    command: python3 main.py

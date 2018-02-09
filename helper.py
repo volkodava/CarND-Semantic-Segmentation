@@ -1,14 +1,16 @@
-import re
-import random
-import numpy as np
 import os.path
-import scipy.misc
+import random
+import re
 import shutil
-import zipfile
 import time
-import tensorflow as tf
+import zipfile
 from glob import glob
 from urllib.request import urlretrieve
+
+import numpy as np
+import scipy.misc
+import tensorflow as tf
+from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
 from tqdm import tqdm
 
 
@@ -138,3 +140,19 @@ def save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_p
         sess, logits, keep_prob, input_image, os.path.join(data_dir, 'data_road/testing'), image_shape)
     for name, image in image_outputs:
         scipy.misc.imsave(os.path.join(output_dir, name), image)
+
+
+def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_prob, logits):
+    if os.path.exists(output_data_dir):
+        shutil.rmtree(output_data_dir)
+    os.makedirs(output_data_dir, exist_ok=True)
+
+    gen_images = gen_test_output(sess, logits, keep_prob, input_image, data_dir, image_shape)
+    for name, image in gen_images:
+        scipy.misc.imsave(os.path.join(output_data_dir, name), image)
+
+    vid_clip = ImageSequenceClip(output_data_dir, fps=25)
+    result_video = os.path.join(output_data_dir, "result.mp4")
+    vid_clip.write_videofile(result_video)
+
+    return result_video
