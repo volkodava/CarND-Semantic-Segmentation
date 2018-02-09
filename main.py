@@ -164,6 +164,7 @@ def run():
     image_shape = (160, 576)
     data_dir = './data'
     runs_dir = './runs'
+    video_dir = os.path.join(runs_dir, "video")
     tests.test_for_kitti_dataset(data_dir)
     epochs = 1
     batch_size = multiprocessing.cpu_count()
@@ -206,7 +207,7 @@ def run():
 
         # OPTIONAL: Apply the trained model to a video
         print("Apply the trained model to a video", flush=True)
-        video_file = helper.gen_video(data_dir, runs_dir, sess, image_shape, input_image, keep_prob, logits)
+        video_file = helper.gen_video(data_dir, video_dir, sess, image_shape, input_image, keep_prob, logits)
         print("{} video saved." % video_file, flush=True)
 
 
