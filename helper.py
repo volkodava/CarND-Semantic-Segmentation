@@ -147,11 +147,10 @@ def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_pr
         shutil.rmtree(output_data_dir)
     os.makedirs(output_data_dir, exist_ok=True)
 
-    gen_images = gen_test_output(sess, logits, keep_prob, input_image, data_dir, image_shape)
-    for name, image in gen_images:
+    for name, image in gen_test_output(sess, logits, keep_prob, input_image, data_dir, image_shape):
         file_name = os.path.join(output_data_dir, name)
         scipy.misc.imsave(file_name, image)
-        print("Saved to %s" % file_name)
+        print("Saved to %s" % file_name, flush=True)
 
     vid_clip = ImageSequenceClip(output_data_dir, fps=25)
     result_video = os.path.join(output_data_dir, "result.mp4")
