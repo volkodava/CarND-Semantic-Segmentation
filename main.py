@@ -43,11 +43,6 @@ def load_vgg(sess, vgg_path):
     layer4_out = tf.get_default_graph().get_tensor_by_name(vgg_layer4_out_tensor_name)
     layer7_out = tf.get_default_graph().get_tensor_by_name(vgg_layer7_out_tensor_name)
 
-    tf.summary.image('image_input', image_input)
-    tf.summary.histogram('layer3_out', layer3_out)
-    tf.summary.histogram('layer4_out', layer4_out)
-    tf.summary.histogram('layer7_out', layer7_out)
-
     return image_input, keep_prob, layer3_out, layer4_out, layer7_out
 tests.test_load_vgg(load_vgg, tf)
 
