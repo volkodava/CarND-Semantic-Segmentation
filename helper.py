@@ -111,12 +111,7 @@ def gen_test_output(sess, logits, keep_prob, image_pl, data_folder, image_shape)
     :param image_shape: Tuple - Shape of image
     :return: Output for for each test image
     """
-    search_path = os.path.join(data_folder, 'image_2', '*.png')
-    print("Search path: %s" % search_path)
-    image_files = glob(search_path)
-    print("Found images: %s" % image_files)
-
-    for image_file in image_files:
+    for image_file in glob(os.path.join(data_folder, 'image_2', '*.png')):
         image = scipy.misc.imresize(scipy.misc.imread(image_file), image_shape)
 
         im_softmax = sess.run(
@@ -148,19 +143,16 @@ def save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_p
 
 
 def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_prob, logits):
-    print("Data dir: %s" % data_dir)
-    print("Output dir: %s" % output_data_dir)
-    
     if os.path.exists(output_data_dir):
         shutil.rmtree(output_data_dir)
     os.makedirs(output_data_dir, exist_ok=True)
 
     for name, image in gen_test_output(sess, logits, keep_prob, input_image, data_dir, image_shape):
         file_name = os.path.join(output_data_dir, name)
-        print("Trying to save %s" % file_name, flush=True)
         scipy.misc.imsave(file_name, image)
+        print("Saved {}".format(file_name), flush=True)
 
-    vid_clip = ImageSequenceClip(output_data_dir, fps=25)
+    vid_clip = ImageSequenceClip(output_data_dir)
     result_video = os.path.join(output_data_dir, "result.mp4")
     vid_clip.write_videofile(result_video)
 

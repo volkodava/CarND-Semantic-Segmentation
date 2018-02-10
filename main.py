@@ -209,7 +209,7 @@ def run():
         print("Apply the trained model to a video", flush=True)
         video_file = helper.gen_video(os.path.join(data_dir, "data_road/testing"),
                                       video_dir, sess, image_shape, input_image, keep_prob, logits)
-        print("{} video saved." % video_file, flush=True)
+        print("{} video saved.".format(video_file), flush=True)
 
 
 if __name__ == '__main__':
