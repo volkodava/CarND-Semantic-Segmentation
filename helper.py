@@ -151,7 +151,7 @@ def gen_video(data_dir, output_data_dir, sess, image_shape, input_image, keep_pr
         file_name = os.path.join(output_data_dir, name)
         scipy.misc.imsave(file_name, image)
 
-    vid_clip = ImageSequenceClip(output_data_dir)
+    vid_clip = ImageSequenceClip(output_data_dir, fps=10)
     result_video = os.path.join(output_data_dir, "result.mp4")
     vid_clip.write_videofile(result_video)
 

@@ -161,7 +161,7 @@ def run():
     runs_dir = './runs'
     video_dir = os.path.join(runs_dir, "video")
     tests.test_for_kitti_dataset(data_dir)
-    epochs = 30
+    epochs = 50
     batch_size = multiprocessing.cpu_count()
 
     # Download pretrained vgg model
